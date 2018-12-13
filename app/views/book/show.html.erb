@@ -1,13 +1,13 @@
-<table>
-  <tr>
-    <th>name</th>
-    <th>surname</th>
-  </tr>
-  <tr>
-    <% @book.each do |s| %>
-      <td><%= s.title %></td>
-      <td><%= s.price %></td>
-      <td><%= s.description %></td>
-    <% end %>
-  </tr>
-</table>
+<% if @book.blank? %>
+<p>There are not any books currently in the system.</p>
+<% else %>
+<p>These are the current books in our system</p>
+
+<ul id = "books">
+   <% @book.each do |c| %>
+   <li><%= link_to c.title {:action => 'show', :id => c.id}-%></li>
+   <% end %>
+</ul>
+
+<% end %>
+<p><%= link_to "Add new Book", {:action => 'new' }%></p>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181213100629) do
+ActiveRecord::Schema.define(version: 20181213140734) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title",       limit: 255,   null: false
@@ -19,7 +19,10 @@ ActiveRecord::Schema.define(version: 20181213100629) do
     t.text     "description", limit: 65535, null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "subject_id",  limit: 4
   end
+
+  add_index "books", ["subject_id"], name: "index_books_on_subject_id", using: :btree
 
   create_table "subjects", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -30,5 +33,6 @@ ActiveRecord::Schema.define(version: 20181213100629) do
 
   add_index "subjects", ["book_id"], name: "index_subjects_on_book_id", using: :btree
 
+  add_foreign_key "books", "subjects"
   add_foreign_key "subjects", "books"
 end
