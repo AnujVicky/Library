@@ -1,13 +1,13 @@
-<% if @book.blank? %>
-<p>There are not any books currently in the system.</p>
-<% else %>
-<p>These are the current books in our system</p>
+<h1><%= @book.title %></h1>
 
-<ul id = "books">
-   <% @book.each do |c| %>
-   <li><%= link_to c.title {:action => 'show', :id => c.id}-%></li>
-   <% end %>
-</ul>
+<p>
+   <strong>Price: </strong> $<%= @book.price %><br />
+   <strong>Subject :</strong> <%= @book.subject.name %><br />
+   <strong>Created Date:</strong> <%= @book.created_at %><br />
+</p>
 
-<% end %>
-<p><%= link_to "Add new Book", {:action => 'new' }%></p>
+<p><%= @book.description %></p>
+
+<hr />
+
+<%= link_to 'Back', {:action => 'list'} %>
