@@ -14,7 +14,7 @@ class BookController < ApplicationController
   end
 
   def create
-   @book = Book.new(book_params)
+   @book = Book.new(book_params_c)
 
    if @book.save
       redirect_to :action => 'list'
@@ -28,7 +28,7 @@ def show_subjects
    @subject = Subject.find(params[:id])
 end
 
-def book_params
+def book_params_c
    params.require(:books).permit(:title, :price, :subject_id, :description)
 end
 
@@ -53,6 +53,7 @@ end
   end
 
   def delete
-
+   Book.find(params[:id]).destroy
+   redirect_to :action => 'list'
   end
 end
